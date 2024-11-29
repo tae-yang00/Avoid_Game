@@ -9,16 +9,16 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 
 pygame.display.set_caption("Avoid Game")
 
-background = pygame.image.load("C:/Python/230308 피하기 게임/background.png")
+background = pygame.image.load("C:/230308 피하기 게임/background.png")
 
-character = pygame.image.load("C:/Python/230308 피하기 게임/character.png")
+character = pygame.image.load("C:/230308 피하기 게임/character.png")
 character_size = character.get_rect().size
 character_width = character_size[0]
 character_height = character_size[1]
 character_x_pos = (screen_width / 2 ) - (character_width / 2)
 character_y_pos = screen_height - character_height
 
-enemy = pygame.image.load("C:/Python/230308 피하기 게임/enemy.png")
+enemy = pygame.image.load("C:/230308 피하기 게임/enemy.png")
 enemy_size = enemy.get_rect().size
 enemy_width = enemy_size[0]
 enemy_height = enemy_size[1]
@@ -71,8 +71,13 @@ while running:
 
     if character_rect.colliderect(enemy_rect):
         print("충돌했어요")
+        game_over_font = pygame.font.SysFont(None, 60)
+        game_over_text = game_over_font.render("Game Over", True, (255, 0, 0))
+        screen.blit(game_over_text, (screen_width / 2 - 100, screen_height / 2 - 30))
+        pygame.display.update()
+        pygame.time.delay(2000)  # 2초 대기
         running = False
-    
+
     screen.blit(background, (0,0))
     screen.blit(character,(character_x_pos,character_y_pos))
     screen.blit(enemy,(enemy_x_pos,enemy_y_pos))
